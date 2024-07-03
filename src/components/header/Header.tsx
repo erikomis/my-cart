@@ -1,18 +1,14 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { SwitchMode } from "../switchMode/SwitchMode";
 
 export const Header = ({ handleOpenCart }: { handleOpenCart: () => void }) => {
   return (
-    <AppBar position="static" sx={{ height: "70px", bgcolor: "gray" }}>
-      <Toolbar
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
+    <AppBar position="static" sx={{ height: "70px", bgcolor: "black" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
-          variant="h5"
+          variant="h6"
           component={Link}
           to="/"
           color="inherit"
@@ -20,6 +16,8 @@ export const Header = ({ handleOpenCart }: { handleOpenCart: () => void }) => {
         >
           Produtos
         </Typography>
+
+        <SwitchMode />
         <Box>
           <IconButton
             color="primary"
