@@ -1,30 +1,84 @@
-# React + TypeScript + Vite
+# My Cart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My Cart é uma aplicação de e-commerce desenvolvida com React, TypeScript e Material UI. O objetivo deste projeto é fornecer uma experiência de compra online simples e eficiente, permitindo que os usuários visualizem produtos, adicionem itens ao carrinho, alterem quantidades e removam produtos.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Node.js**: v20.9.0
+- **npm**: v10.1.0
+- **React**
+- **TypeScript**
+- **Material UI**
+- **Context API** para gerenciamento de estado
+- **localStorage** para persistência de dados do carrinho
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Listagem de produtos
+- Visualização de detalhes dos produtos
+- Adição de produtos ao carrinho
+- Alteração de quantidades dos produtos no carrinho
+- Remoção de produtos do carrinho
+- Notificações para feedback de ações do usuário
 
-- Configure the top-level `parserOptions` property like this:
+## Instalação
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Siga os passos abaixo para configurar e executar o projeto localmente.
+
+### Pré-requisitos
+
+- Node.js v20.9.0
+- npm v10.1.0
+
+### Passos para Instalação
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone git@github.com:erikomis/my-cart.git
+   cd my-cart
+   ```
+
+2. **Instale as dependências:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Execute a aplicação:**
+
+   ```bash
+   npm dev
+   ```
+
+   ou
+
+   ```bash
+   npm start
+   ```
+
+4. **Abra o navegador e acesse:**
+
+   ```
+   http://localhost:5173/
+   ```
+
+## Estrutura do Projeto
+
+```plaintext
+my-cart/
+├── public/
+├── src/
+│   ├── components/
+│   ├── context/
+│   ├── hooks
+│   ├── pages/
+│   ├── styles
+│   ├── utils/
+│   ├── index.css
+│   ├── main.tsx
+│   └── routes.tsx
+├── package.json
+├── tsconfig.json
+└── ...
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
