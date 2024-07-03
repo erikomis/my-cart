@@ -3,6 +3,7 @@ import {
   CartContextData,
   CartProviderProps,
   ProductFormatted,
+  UpdateProductAmount,
 } from "../types/cart";
 import { estoque, itemsParaCompra } from "../utils/utils";
 import { Item } from "../types/items";
@@ -64,12 +65,60 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
   };
 
+  const removeProduct = (productId: number) => {
+    try {
+      const updatedCart = cart.filter((product) => product.id !== productId);
+
+      if (updatedCart.length === cart.length)
+        throw new Error("Produto não encontrado no carrinho");
+
+      setCart(updatedCart);
+      updateLocalStorage(updatedCart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateProductAmount = async ({
+    productId,
+    amount,
+  }: UpdateProductAmount) => {
+    try {
+      if (amount <= 0) return;
+
+      const stockAmount = estoque.find(
+        (product) => product.id === productId
+      )?.quantia;
+
+      if (!stockAmount) {
+        return;
+      }
+
+      if (amount > stockAmount) {
+        return;
+      }
+
+      const updatedCart = [...cart];
+      const product = updatedCart.find((product) => product.id === productId);
+
+      if (!product) throw new Error("Produto não encontrado no carrinho");
+
+      product.quantidade = amount;
+      setCart(updatedCart);
+      updateLocalStorage(updatedCart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart,
-        addProduct,
         products,
+        addProduct,
+        removeProduct,
+        updateProductAmount,
       }}
     >
       {children}
