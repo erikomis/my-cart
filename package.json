@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://erikomis.github.io/my-cart/",
+  "homepage": "https://erikomis.github.io/my-cart",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
