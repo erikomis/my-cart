@@ -8,11 +8,13 @@ import {
 import { estoque, itemsParaCompra } from "../utils/utils";
 import { Item } from "../types/items";
 import { formatPrice } from "../utils/format";
+import { useNotification } from "./NotificationContext";
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
 
 const LOCAL_STORAGE_KEY = "@my-cart:cart";
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
+  const { showNotification } = useNotification();
   const [products] = useState<ProductFormatted[]>(
     itemsParaCompra.map((product) => ({
       ...product,
@@ -39,6 +41,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       )?.quantia;
 
       if (!stockAmount) {
+        showNotification("Produto não encontrado no estoque");
         return;
       }
 
@@ -46,6 +49,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       const amount = currentAmount + 1;
 
       if (amount > stockAmount) {
+        showNotification("Quantidade solicitada fora de estoque");
         return;
       }
 
@@ -61,7 +65,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       setCart(updatedCart);
       updateLocalStorage(updatedCart);
     } catch (error) {
-      console.log(error);
+      showNotification("Erro na adição do produto");
     }
   };
 
@@ -75,7 +79,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       setCart(updatedCart);
       updateLocalStorage(updatedCart);
     } catch (error) {
-      console.log(error);
+      showNotification("Erro na remoção do produto");
     }
   };
 
@@ -91,10 +95,12 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       )?.quantia;
 
       if (!stockAmount) {
+        showNotification("Produto não encontrado no estoque");
         return;
       }
 
       if (amount > stockAmount) {
+        showNotification("Quantidade solicitada fora de estoque");
         return;
       }
 
@@ -107,7 +113,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       setCart(updatedCart);
       updateLocalStorage(updatedCart);
     } catch (error) {
-      console.log(error);
+      showNotification("Erro na alteração de quantidade do produto");
     }
   };
 
