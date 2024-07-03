@@ -5,11 +5,14 @@ import "./index.css";
 import { router } from "./routes";
 import { RouterProvider } from "react-router-dom";
 import { CartProvider } from "./context/cart";
+import { NotificationProvider } from "./context/NotificationContext";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <NotificationProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </NotificationProvider>
   </React.StrictMode>
 );
