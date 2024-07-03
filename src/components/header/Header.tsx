@@ -1,7 +1,8 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export const Header = () => {
+export const Header = ({ handleOpenCart }: { handleOpenCart: () => void }) => {
   return (
     <AppBar position="static" sx={{ height: "70px", bgcolor: "gray" }}>
       <Toolbar
@@ -19,6 +20,15 @@ export const Header = () => {
         >
           Produtos
         </Typography>
+        <Box>
+          <IconButton
+            color="primary"
+            data-testid="add-product-button"
+            onClick={handleOpenCart}
+          >
+            <ShoppingCartIcon />
+          </IconButton>
+        </Box>
       </Toolbar>
     </AppBar>
   );
